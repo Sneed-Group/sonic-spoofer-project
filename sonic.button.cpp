@@ -5,7 +5,14 @@
 // waram = 0 = OnRedButtonReleased, 1 = OnRedButtonPressed, 2 = Detected?, 3 = Removed?
 // Param = unused
 
-int main() {
-SendMessage ( (HWND) 0x1000b02c8, 0x8004, 2, 0);
-return 0;
+
+extern "C" __declspec(dllexport) void HelloWorld()
+{
+    MessageBox(NULL, "Red Button Pressed!", "DLL Message", MB_OK);
+    SendMessage ( (HWND) 0x1000b02c8, 0x8004, 2, 0);
+}
+
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved)
+{
+    return TRUE;
 }
